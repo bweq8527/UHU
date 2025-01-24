@@ -1,5 +1,5 @@
---引用func.lua文件
-require("func")
+--引用func_MovingLogic.lua文件
+require("func_MovingLogic")
 
 --初始化
 function love.load()
@@ -13,7 +13,7 @@ function love.load()
     rec_y=20
     rec_width=20
     rec_length=20
-    sizeCtrl=1 
+    sizeCtrl=1
     --滑块移动方向，初始方向为向右下移动
     MoveStates={"RightDown","RightUp","LeftUp","LeftDown"}
     MoveState=MoveStates[1]
