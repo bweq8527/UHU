@@ -30,12 +30,19 @@ function blockMove(rec_x,rec_y,MoveState,dt)
 end
 --控制滑块大小变化的函数
 function blockSize()
-    local range=1/40                              --滑块变动范围
-    local initSize=50                             --滑块基础大小
+    local range=1/20                              --滑块变动范围
+    local initSize=48                             --滑块基础大小
     local frequent=1+math.sin(sizeCtrl)*range     --滑块变动频率
     local rec_width=initSize*frequent
-    local rec_length=initSize*frequent
+    local rec_length=initSize*frequent*2
     return rec_width,rec_length
+end
+--控制滑块颜色变化的函数
+function blockColor(frame)
+    R=math.sin(0.5*frame-math.pi/2)
+    G=math.sin(0.5*frame)
+    B=math.sin(0.5*frame+math.pi/2)
+    return R,G,B
 end
 --判断滑块是否触碰边框的函数
 function isColliding(rec_x,rec_y,rec_width,rec_length)
