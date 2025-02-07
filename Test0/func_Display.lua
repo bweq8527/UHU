@@ -21,4 +21,5 @@ function show(frame)
     local range=1/20                              --滑块变动范围
     local frequent=1+math.sin(sizeCtrl)*range     --滑块变动频率
     love.graphics.draw(Pic1,Mario[realFrame+1],rec_x,rec_y,0,0.3*frequent,0.3*frequent) --将帧显示在计算好的位置
+    love.graphics.print("Mario",rec_x,rec_y-20)
 end
