@@ -3,6 +3,7 @@
 参数：父类（可为空）
 返回值：创建好的“类”，实际上是一个table
 使用例：Animal=class()，Dog=class(Animal)
+!!注意在定义类时，类方法中涉及修改类参数的地方要用self而不是类名，这样实例化后修改的是实例的参数而不是类的参数。例如Button:changePos(x,y)中要用self.x=x而不能用Button.x=x
 ↓↓]]
 function class(parent)
     --↓↓新建一个table“userClass”
@@ -54,4 +55,5 @@ function class(parent)
         end --#2（如上述）
         return instance
     end
+    return userClass
 end
