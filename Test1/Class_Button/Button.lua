@@ -9,7 +9,9 @@ Button=class()
 --[[
 ·类参数
 ↓↓]]
-Button.pos={x=0, y=0}                   --|位置
+Button.pos={}
+Button.pos.x=0                          --|位置x
+Button.pos.y=0                          --|位置y
 Button.size=50                          --|大小
 Button.icon_normal=fullscreen           --|图标（通常情况）
 Button.icon_undermouse=unFullscreen     --|图标（鼠标悬停）
@@ -21,6 +23,7 @@ Button.MouseState=MouseStates[1]        --|鼠标状态
 ↓↓]]
 --#1.1初始化
 function Button:init(x,y,size,icon,name)
+    self.pos={}
     self.pos.x=x
     self.pos.y=y
     self.size=size
@@ -36,17 +39,18 @@ end
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
     self:action_dodge()                 --|实现躲闪效果
-    love.graphics.print("**mousestate:"..type(self.MouseState)..":"..self.MouseState.."**",500,500)
-    self:drawIcon(self.MouseState)      --|根据交互关系绘制相应图标
+    self:drawIcon()                     --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
-    love.graphics.print("pos.x"..self.pos.x,500,520)
-    love.graphics.print("pos.y"..self.pos.y,500,550)
-    love.graphics.rectangle("line",self.pos.x,self.pos.y,self.size,self.size)
+    --↓↓调试↓↓
+    --love.graphics.print("pos.x"..self.pos.x,500,535)
+    --love.graphics.print("pos.y"..self.pos.y,500,550)
+    --love.graphics.rectangle("line",self.pos.x,self.pos.y,self.size,self.size)
+    --↑↑调试↑↑
     local nowX, nowY = love.mouse.getPosition() --|鼠标位置
     local nowMouse = love.mouse.isDown(1)       --|鼠标左键是否按下
-    local mouseState=nil
+    local mouseState=MouseStates[1]             --|鼠标状态
     if  nowX>self.pos.x and nowX<self.pos.x+self.size and nowY>self.pos.y and nowY<self.pos.y+self.size then
         if nowMouse then
             mouseState= MouseStates[3]               --*1.鼠标按下按钮
@@ -56,16 +60,19 @@ function Button:mouseState()
     else
         mouseState= MouseStates[1]                   --*3.鼠标与按钮无交互
     end
+    self.MouseState = mouseState
+    --↓↓调试↓↓
+    --love.graphics.print("mouseState():"..mouseState,500,500)
+    --love.graphics.print("MouseState:"..self.MouseState,500,520)
+    --↑↑调试↑↑
     
-    love.graphics.print("mouseState:"..mouseState,500,500)
-    return mouseState
 end
---鼠标与按钮交互的动效
-function Button:UnderMouse()
+--鼠标与按钮交互的功能
+function Button:func_UnderMouse()
     
 end
 --绘制按钮的图标
-function Button:drawIcon(Mouse_State)
+function Button:drawIcon()
     --[[
     实现switch-case语句
     #1.cases
@@ -80,7 +87,7 @@ function Button:drawIcon(Mouse_State)
         *第三个参数是图像的旋转角度，默认0
         *第四个参数是图像的缩放比例，这里调用了Button:scaleCult()函数，返回了缩放比例，实际上这里是两个参数
     ↓↓]]
-    love.graphics.print(Mouse_State,800,560)
+    case=self.MouseState
     local cases=
     {
         [MouseStates[1]]=function()
@@ -93,7 +100,7 @@ function Button:drawIcon(Mouse_State)
             love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_pressed))
         end
     }   --#1（如上述）
-    ((cases[Mouse_State]) or function()print("Error: Invalid MouseState")end) ()
+    ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
 end
 --计算图标缩放比例
 function Button:scaleCult(image)
@@ -111,7 +118,7 @@ function Button:action_dodge()
     --*1.1如果鼠标位于按钮附近（图标外围50%区域）,执行以下代码以使图标向鼠标相对中心的方向远离。但距离中心特别近将会导致缩放比例过大，设置一个上限
     if  trueX>icon_basePoint[1]-self.size and trueX<icon_basePoint[1]+self.size and trueY>icon_basePoint[2]-self.size and trueY<icon_basePoint[2]+self.size then
         local distance=math.sqrt((trueX-icon_basePoint[1])^2+(trueY-icon_basePoint[2])^2)   --计算鼠标与按钮中心的距离
-        local scale=math.min(10/distance^1.45,5)                                            --计算缩放比例（按照引力场的平方反比关系），上限为5倍    
+        local scale=math.min(20/distance^1.25,20)                                            --计算缩放比例（按照引力场的平方反比关系），上限为5倍    
         local delta_x=-scale*(trueX-icon_basePoint[1])                                      --计算x方向的位移
         local delta_y=-scale*(trueY-icon_basePoint[2])                                      --计算y方向的位移
         ProcessedPos.x=self.pos.x+delta_x                                                 
@@ -122,8 +129,8 @@ function Button:action_dodge()
         ProcessedPos.y=self.pos.y
     end
         --↓↓调试↓↓
-        love.graphics.print(ProcessedPos.x,800,500)
-        love.graphics.print(ProcessedPos.y,800,515)
+        love.graphics.print("ProcessedPosition_Y:"..ProcessedPos.x,130,420)
+        love.graphics.print("ProcessedPosition_X:"..ProcessedPos.y,130,435)
         --↑↑调试↑↑
         return ProcessedPos                                                                  --返回图标的绘制位置
 end
