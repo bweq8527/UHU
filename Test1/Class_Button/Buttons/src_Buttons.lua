@@ -1,4 +1,4 @@
-local bt_test=Button:new(550,150,30,{exit,fullscreen,unFullscreen},"Func_test")
+local bt_test=Button:new(400,100,80,{exit,fullscreen,unFullscreen},"Func_test")
 
 local buttons={}
 table.insert(buttons,bt_test)
