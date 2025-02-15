@@ -34,9 +34,7 @@ function love.draw()
     --绘制用户资源
    bt_test:drawIcon()
    Print[3]("123456789qwertyudiiopkljhlkjhkjhsfamnbvm,nbzvmcnxb",100,100,timeline,1)
-   Print[3]("12345678123456781234567812345678123456781234da567",100,200,timeline,1)
-   Print[3]("12345678123456781234567812345678asdaddasdaw234567",100,250,timeline,1)
-   Print[3]("1as1234567812345678123456781234567812345678123457",100,300,timeline,1)
-
-
+   Print[3]("adasdasda",100,200,timeline,1)
+   Print[3]("1567",100,250,timeline,1)
+   Print[3]("为啥不能用中文",100,300,timeline,1)
 end
