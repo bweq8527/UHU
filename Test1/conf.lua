@@ -1,3 +1,4 @@
+--配置文件
 function love.conf(win)
     win.title="UHOoO"               --重命名窗体名称
     win.window.width=1920/2         --窗体初始宽度

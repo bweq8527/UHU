@@ -1,16 +1,13 @@
-iconSize={x=50,y=50}    --图标大小固定为50*50
-
---自动计算缩放比例
-function scaleCult(image)
-    initX,initY=image:getDimensions()
-    scaleX=iconSize.x/initX
-    scaleY=iconSize.y/initY
-    return scaleX,scaleY
-end
+--[[加载资源]]
 
 --加载图标
-fullscreen=love.graphics.newImage("Icons/fullscreen.png")
-unFullscreen=love.graphics.newImage("Icons/unFullscreen.png")
-exit=love.graphics.newImage("Icons/exit.png")
-mouse_0=love.graphics.newImage("Icons/mouse_0.png")
-mouse_1=love.graphics.newImage("Icons/mouse_1.png")
+fullscreen=love.graphics.newImage("Sources/Icons/fullscreen.png")
+unFullscreen=love.graphics.newImage("Sources/Icons/unFullscreen.png")
+exit=love.graphics.newImage("Sources/Icons/exit.png")
+mouse_0=love.graphics.newImage("Sources/Icons/mouse_0.png")
+mouse_1=love.graphics.newImage("Sources/Icons/mouse_1.png")
+--加载字体
+Pixel1_sml=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",20)
+Pixel1_mid=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",40)
+Pixel1_lrg=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",60)
+Pixel2_cn=love.graphics.newFont("Sources/Fonts/fusion-zh_hans.ttf",40)

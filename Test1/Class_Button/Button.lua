@@ -67,11 +67,7 @@ function Button:mouseState()
     --↑↑调试↑↑
     
 end
---鼠标与按钮交互的功能
-function Button:func_UnderMouse()
-    
-end
---绘制按钮的图标
+--#1.4绘制按钮的图标
 function Button:drawIcon()
     --[[
     实现switch-case语句
@@ -102,7 +98,7 @@ function Button:drawIcon()
     }   --#1（如上述）
     ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
 end
---计算图标缩放比例
+--#1.5计算图标缩放比例
 function Button:scaleCult(image)
     local iconSize={x=self.size,y=self.size}    --图标大小固定
     local initX,initY=image:getDimensions()     --获取图标原始大小
@@ -110,7 +106,7 @@ function Button:scaleCult(image)
     local scaleY=iconSize.y/initY               --计算y缩放比例
     return scaleX,scaleY 
 end
---图标“躲闪”动效的逻辑实现
+--#1.6图标“躲闪”动效的逻辑实现
 function Button:action_dodge()
     local trueX,trueY=love.mouse.getPosition()                                              --获取鼠标位置
     local icon_basePoint={self.pos.x+self.size/2,self.pos.y+self.size/2}                    --按钮中心
@@ -129,8 +125,12 @@ function Button:action_dodge()
         ProcessedPos.y=self.pos.y
     end
         --↓↓调试↓↓
-        love.graphics.print("ProcessedPosition_Y:"..ProcessedPos.x,130,420)
-        love.graphics.print("ProcessedPosition_X:"..ProcessedPos.y,130,435)
+        --love.graphics.print("ProcessedPosition_Y:"..ProcessedPos.x,130,420)
+        --love.graphics.print("ProcessedPosition_X:"..ProcessedPos.y,130,435)
         --↑↑调试↑↑
         return ProcessedPos                                                                  --返回图标的绘制位置
+end
+--#2.1鼠标与按钮交互的功能
+function Button:func_UnderMouse()
+        
 end
