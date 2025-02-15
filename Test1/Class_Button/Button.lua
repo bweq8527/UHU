@@ -1,4 +1,5 @@
-MouseStates={}                          --|鼠标状态（与按钮的交互关系）
+require("Func_Display/Src_DisplayFuncs")--|引用文字处理控件
+local MouseStates={}                    --|鼠标状态（与按钮的交互关系）
 MouseStates[1]="normal"
 MouseStates[2]="underMouse"
 MouseStates[3]="pressed"
@@ -83,6 +84,7 @@ function Button:drawIcon()
         *第三个参数是图像的旋转角度，默认0
         *第四个参数是图像的缩放比例，这里调用了Button:scaleCult()函数，返回了缩放比例，实际上这里是两个参数
     ↓↓]]
+    local X,Y=love.mouse.getPosition()
     case=self.MouseState
     local cases=
     {
@@ -91,12 +93,16 @@ function Button:drawIcon()
         end,
         [MouseStates[2]]=function()
             love.graphics.draw(self.icon_undermouse,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_undermouse))
+            Print[3](self.name,X-50,Y+20,timeline,"adasd")
+            Print[3](self.name,X-50,Y+50,timeline,1)
+            Print[3](self.name,X-50,Y+80,timeline)
         end,
         [MouseStates[3]]=function()
             love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_pressed))
         end
     }   --#1（如上述）
     ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
+
 end
 --#1.5计算图标缩放比例
 function Button:scaleCult(image)
@@ -132,5 +138,5 @@ function Button:action_dodge()
 end
 --#2.1鼠标与按钮交互的功能
 function Button:func_UnderMouse()
-        
+
 end
