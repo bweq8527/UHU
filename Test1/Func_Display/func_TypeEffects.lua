@@ -54,7 +54,7 @@ local function printEffect3(strings, x, y, timeline, isColorful)
 
     --如果需要炫彩模式
         if isColorful == 1 then  --炫彩模式
-            local seed=length+utf8.codepoint(strings, 1)        --随机种子
+            local seed=length+utf8.codepoint(strings, 1)        --生成随机种子
             math.randomseed(seed)                               --设置随机种子
             --为每个字符分配伪随机的颜色
             for i = 1, length do

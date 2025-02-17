@@ -34,13 +34,13 @@ function Button:init(x,y,size,icon,name)
     self.name=name
     self.MouseState="normal"
 
-    self:drawIcon(self.MouseState)
+    self:drawButton(self.MouseState)
 end
 --#1.2更新
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
     self:action_dodge()                 --|实现躲闪效果
-    self:drawIcon()                     --|根据交互关系绘制相应图标
+    self:drawButton()                     --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
@@ -69,7 +69,7 @@ function Button:mouseState()
     
 end
 --#1.4绘制按钮的图标
-function Button:drawIcon()
+function Button:drawButton()
     --[[
     实现switch-case语句
     #1.cases
@@ -89,30 +89,21 @@ function Button:drawIcon()
     local cases=
     {
         [MouseStates[1]]=function()
-            love.graphics.draw(self.icon_normal,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_normal))
+            love.graphics.draw(self.icon_normal,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_normal))
         end,
         [MouseStates[2]]=function()
-            love.graphics.draw(self.icon_undermouse,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_undermouse))
-            Print[3](self.name,X-50,Y+20,timeline,"adasd")
-            Print[3](self.name,X-50,Y+50,timeline,1)
-            Print[3](self.name,X-50,Y+80,timeline)
+            love.graphics.draw(self.icon_undermouse,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_undermouse))
+            Print[3](self.name,X,Y+50,timeline,1)
         end,
         [MouseStates[3]]=function()
-            love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,self:scaleCult(self.icon_pressed))
+            love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_pressed))
+            Print[3](self.name,X,Y+50,timeline,1)
         end
     }   --#1（如上述）
     ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
 
 end
---#1.5计算图标缩放比例
-function Button:scaleCult(image)
-    local iconSize={x=self.size,y=self.size}    --图标大小固定
-    local initX,initY=image:getDimensions()     --获取图标原始大小
-    local scaleX=iconSize.x/initX               --计算x缩放比例
-    local scaleY=iconSize.y/initY               --计算y缩放比例
-    return scaleX,scaleY 
-end
---#1.6图标“躲闪”动效的逻辑实现
+--#1.5图标“躲闪”动效的逻辑实现
 function Button:action_dodge()
     local trueX,trueY=love.mouse.getPosition()                                              --获取鼠标位置
     local icon_basePoint={self.pos.x+self.size/2,self.pos.y+self.size/2}                    --按钮中心

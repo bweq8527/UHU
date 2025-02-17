@@ -6,9 +6,13 @@
 --]]
 require("Class_Button/Button")
 require "Class_Button/Buttons/bt_test"
+require "Class_Button/Buttons/bt_Fullscreen"
+require "Class_Button/Buttons/bt_Exit"
 
 function buttonsSrcInit()
     local buttons={}
     table.insert(buttons,button_test())
+    table.insert(buttons,button_fullscreen())
+    table.insert(buttons,button_exit())
     return buttons
 end

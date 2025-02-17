@@ -2,7 +2,9 @@
 require "utf8"
 require("initSrc")
 require("class")
+require("Func_Logic/func_DrawLogics")
 require("Class_Button/Buttons/Src_Buttons")
+require("Class_Mouse/Mouses/Src_Mouses")
 require("Func_Display/Src_DisplayFuncs")
 
 --初始化
@@ -16,7 +18,12 @@ function love.load()
     love.window.setMode(window_width,window_height,{highdpi = true,resizable=true})    
     flag_FullScreen = false
     --初始化用户资源
-    bt_test=buttonsSrcInit()[1]
+    buttons=buttonsSrcInit()
+    bt_test=buttons[1]
+    bt_Fullscreen=buttons[2]
+    bt_Exit=buttons[3]
+    mouses=mousesSrcInit()
+    ms_StartMenu=mouses[1]
     --创建时间线以供游戏内时间使用
     timeline=1
 end
@@ -24,17 +31,17 @@ end
 --循环更新
 function love.update(dt)
     --更新用户资源
-    bt_test:update()
+    bt_Fullscreen:update()
+    bt_Exit:update()
+    ms_StartMenu:update()
     --游戏内时间变动
-    timeline=timeline+dt*50
+    timeline=timeline+dt*60
 end
 
 --循环绘制
 function love.draw()
     --绘制用户资源
-   bt_test:drawIcon()
-   Print[3]("123456789qwertyudiiopkljhlkjhkjhsfamnbvm,nbzvmcnxb",100,100,timeline,1)
-   Print[3]("adasdasda",100,200,timeline,1)
-   Print[3]("1567",100,250,timeline,1)
-   Print[3]("丢押送i都哦iu去哦丢哟i后就撒旦莲花山第一奥萨蒂    uo阿松地 ",100,300,timeline,1)
+   bt_Fullscreen:drawButton()
+   bt_Exit:drawButton()
+   ms_StartMenu:drawMouse()
 end
