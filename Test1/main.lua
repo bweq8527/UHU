@@ -36,5 +36,5 @@ function love.draw()
    Print[3]("123456789qwertyudiiopkljhlkjhkjhsfamnbvm,nbzvmcnxb",100,100,timeline,1)
    Print[3]("adasdasda",100,200,timeline,1)
    Print[3]("1567",100,250,timeline,1)
-   Print[3]("为啥不能用中文",100,300,timeline,1)
+   Print[3]("丢押送i都哦iu去哦丢哟i后就撒旦莲花山第一奥萨蒂    uo阿松地 ",100,300,timeline,1)
 end

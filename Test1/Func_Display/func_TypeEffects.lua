@@ -54,7 +54,7 @@ local function printEffect3(strings, x, y, timeline, isColorful)
 
     --如果需要炫彩模式
         if isColorful == 1 then  --炫彩模式
-            local seed=length+utf8.codepoint(strings, start)    --随机种子
+            local seed=length+utf8.codepoint(strings, 1)        --随机种子
             math.randomseed(seed)                               --设置随机种子
             --为每个字符分配伪随机的颜色
             for i = 1, length do
@@ -73,7 +73,7 @@ local function printEffect3(strings, x, y, timeline, isColorful)
         local inclination = (math.sin(timeline * 0.08)) * 0.08
         -- 设置当前字符的颜色
         local colorChangeScale=0.15  --颜色微变范围
-        local colorChangeValue=0.2   --颜色微变速率
+        local colorChangeValue=0.08  --颜色微变速率
         local currentColor=Color_String[charIndex]
         COLOR=
         {
