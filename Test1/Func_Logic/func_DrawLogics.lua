@@ -33,7 +33,9 @@ function ProcessIcon(image)
     -- 创建缩小图
     local smallCanvas = love.graphics.newCanvas(width, height)
     love.graphics.setCanvas(smallCanvas)
-    love.graphics.draw(original, 0.2*width, 0.2*height, 0, 0.8, 0.8)  -- 缩小一半
+    local scale=0.8                 --缩小比例
+    local position=(1-scale)/2      --重新绘制的位置，使缩小后的图标相比原图居中
+    love.graphics.draw(original, width*position, height*position, 0, scale, scale)  -- 缩小一半
     love.graphics.setCanvas()
     -- 将缩小的 Canvas 转换为 Image 类型
     local smallImage = smallCanvas:newImageData():encode("png")

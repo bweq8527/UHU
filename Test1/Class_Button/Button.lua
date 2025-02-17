@@ -127,7 +127,10 @@ function Button:action_dodge()
         --↑↑调试↑↑
         return ProcessedPos                                                                  --返回图标的绘制位置
 end
---#2.1鼠标与按钮交互的功能
+--#2.1鼠标与按钮交互的功能，这部分可以在实例化时编写所需的具体逻辑
 function Button:func_UnderMouse()
-
+    --在此处编写鼠标悬停在按钮上的具体逻辑
+end
+function Button:func_Pressed()
+    --在此处编写鼠标按下按钮的具体逻辑
 end
