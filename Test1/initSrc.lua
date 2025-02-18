@@ -7,6 +7,7 @@ exit=love.graphics.newImage("Sources/Icons/exit.png")
 setting=love.graphics.newImage("Sources/Icons/setting.png")
 mouse_0=love.graphics.newImage("Sources/Icons/mouse_0.png")
 mouse_1=love.graphics.newImage("Sources/Icons/mouse_1.png")
+github=love.graphics.newImage("Sources/Icons/github.png")
 --加载字体
 Pixel1_sml=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",20)
 Pixel1_mid=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",40)

@@ -24,6 +24,7 @@ function love.load()
     bt_Fullscreen=buttons[2]
     bt_Exit=buttons[3]
     bt_Setting=buttons[4]
+    bt_github=buttons[5]
     mouses=mousesSrcInit()
     ms_StartMenu=mouses[1]
     --创建时间线以供游戏内时间使用
@@ -36,6 +37,7 @@ function love.update(dt)
     bt_Fullscreen:update()
     bt_Exit:update()
     bt_Setting:update()
+    bt_github:update()
     ms_StartMenu:update()
     --游戏内时间变动
     timeline=timeline+dt*60
@@ -47,5 +49,6 @@ function love.draw()
    bt_Fullscreen:drawButton()
    bt_Exit:drawButton()
    bt_Setting:drawButton()
+   bt_github:drawButton()
    ms_StartMenu:drawMouse()
 end
