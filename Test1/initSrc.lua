@@ -4,6 +4,7 @@
 fullscreen=love.graphics.newImage("Sources/Icons/fullscreen.png")
 unFullscreen=love.graphics.newImage("Sources/Icons/unFullscreen.png")
 exit=love.graphics.newImage("Sources/Icons/exit.png")
+setting=love.graphics.newImage("Sources/Icons/setting.png")
 mouse_0=love.graphics.newImage("Sources/Icons/mouse_0.png")
 mouse_1=love.graphics.newImage("Sources/Icons/mouse_1.png")
 --加载字体

@@ -22,7 +22,7 @@ function ProcessIcon(image)
     love.graphics.setCanvas(maskCanvas)
     love.graphics.clear(0, 0, 0, 0)  -- 清空画布
     -- 将图片绘制到画布上，并加上灰色蒙版
-    love.graphics.setColor(0.7, 0.7, 0.7, 0.5)  -- 设置为半透明的灰色
+    love.graphics.setColor(0.7, 0.7, 0.7, 0.2)  -- 设置为半透明的灰色
     love.graphics.draw(original, 0, 0)
     love.graphics.setCanvas()  -- 结束绘制
     love.graphics.setColor(1,1,1)   --恢复默认颜色
@@ -43,21 +43,4 @@ function ProcessIcon(image)
 
     local icons={original, mask, smallImage}
     return icons
-end
-
-
-
-
-function buttonFunc()
-    love.mousereleased = function(x, y, button, istouch, presses)
-        if button == 1 then
-            if  x>20 and x<20+50 and y>20 and y<20+50 then
-                flag_FullScreen = not flag_FullScreen
-                love.window.setFullscreen(flag_FullScreen)
-            elseif x>20+80 and x<20+50+80 and y>20 and y<20+50 then
-                love.event.quit()
-            end
-        end
-    end
-    
 end

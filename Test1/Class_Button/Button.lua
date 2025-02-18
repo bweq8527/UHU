@@ -40,7 +40,7 @@ end
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
     self:action_dodge()                 --|实现躲闪效果
-    self:drawButton()                     --|根据交互关系绘制相应图标
+    self:drawButton()                   --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
@@ -127,6 +127,11 @@ function Button:action_dodge()
         --↑↑调试↑↑
         return ProcessedPos                                                                  --返回图标的绘制位置
 end
+--#1.6判断鼠标是否在按钮区域
+function Button:checkMouse()
+    return not(self.MouseState=="normal")
+end
+
 --#2.1鼠标与按钮交互的功能，这部分可以在实例化时编写所需的具体逻辑
 function Button:func_UnderMouse()
     --在此处编写鼠标悬停在按钮上的具体逻辑
