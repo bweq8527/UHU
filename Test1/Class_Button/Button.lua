@@ -33,8 +33,6 @@ function Button:init(x,y,size,icon,name)
     self.icon_pressed=icon[3]
     self.name=name
     self.MouseState="normal"
-
-    self:drawButton(self.MouseState)
 end
 --#1.2更新
 function Button:update()
