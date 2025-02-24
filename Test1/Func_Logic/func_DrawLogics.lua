@@ -2,7 +2,7 @@
 此处记录了一些处理绘制过程中需要的通用逻辑，因此均为全局方法
 ]]
 
---将图片处理为统一大小
+--#1.将图片处理为统一大小
 function scaleCult(sizeX,sizeY,pic)
     local iconSize={x=sizeX,y=sizeY}            --图标大小固定
     local initX,initY=pic:getDimensions()       --获取图标原始大小
@@ -11,7 +11,7 @@ function scaleCult(sizeX,sizeY,pic)
     return scaleX,scaleY 
 end
 
---将图片对象处理为按钮三个不同状态时显示的图标（原图、半透明、缩小，对应通常状态、悬停状态、按下状态）
+--#2.将图片对象处理为按钮三个不同状态时显示的图标（原图、半透明、缩小，对应通常状态、悬停状态、按下状态）
 function ProcessIcon(image)
     -- 创建原图
     local original = image

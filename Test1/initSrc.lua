@@ -13,3 +13,8 @@ Pixel1_sml=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",20)
 Pixel1_mid=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",40)
 Pixel1_lrg=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",60)
 Pixel2_cn=love.graphics.newFont("Sources/Fonts/fusion-zh_hans.ttf",40)
+--加载动图
+Mario={}
+table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/1.png"))
+table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/2.png"))
+table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/3.png"))

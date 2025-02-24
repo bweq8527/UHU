@@ -6,6 +6,7 @@ require("Func_Logic/func_DrawLogics")
 require("Func_Logic.func_ButtonPressedLogics")
 require("Class_Button/Buttons/Src_Buttons")
 require("Class_Mouse/Mouses/Src_Mouses")
+require("Class_Animation/Animations/Src_Animations")
 require("Func_Display/Src_DisplayFuncs")
 
 --初始化
@@ -27,6 +28,8 @@ function love.load()
     bt_github=buttons[5]
     mouses=mousesSrcInit()
     ms_StartMenu=mouses[1]
+    animations=animationsSrcInit()
+    an_mario=animations[1]
     --创建时间线以供游戏内时间使用
     timeline=1
 end
@@ -39,6 +42,7 @@ function love.update(dt)
     bt_Setting:update()
     bt_github:update()
     ms_StartMenu:update()
+    an_mario:update()
     --游戏内时间变动
     timeline=timeline+dt*60
 end
@@ -50,5 +54,18 @@ function love.draw()
    bt_Exit:drawButton()
    bt_Setting:drawButton()
    bt_github:drawButton()
+   an_mario:drawAnimation()
    ms_StartMenu:drawMouse()
+   
+   Print[3]("frames:"..an_mario.frames, 400, 100, timeline, true)
+   Print[3]("currentFrame:"..an_mario.currentFrame, 400, 200, timeline, true)
+   Print[3]("bornTime:"..an_mario.bornTime, 400, 300, timeline, true)
+   Print[3]("lastSleepTime:"..an_mario.lastSleepTime, 400, 400, timeline, true)
+   Print[3]("age:"..an_mario.age, 400, 500, timeline, true)
+   Print[3]("speed:"..an_mario.speed, 400, 600, timeline, true)
+   --Print[3](an_mario.lastFlag, 400, 700, timeline, true)
+   --Print[3](an_mario.Flag, 400, 800, timeline, true)
+   Print[3]("timeline:"..timeline, 400, 700, timeline, true)
+
+
 end
