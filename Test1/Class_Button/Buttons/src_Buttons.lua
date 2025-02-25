@@ -10,6 +10,7 @@ require "Class_Button/Buttons/bt_Fullscreen"
 require "Class_Button/Buttons/bt_Exit"
 require "Class_Button/Buttons/bt_Setting"
 require "Class_Button.Buttons.bt_Github"
+require "Class_Button.Buttons.bt_Pause"
 
 function buttonsSrcInit()
     local buttons={}
@@ -18,5 +19,6 @@ function buttonsSrcInit()
     table.insert(buttons,button_exit())
     table.insert(buttons,button_setting())
     table.insert(buttons,button_github())
+    table.insert(buttons,button_pause())
     return buttons
 end
