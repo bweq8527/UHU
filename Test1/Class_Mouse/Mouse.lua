@@ -25,6 +25,7 @@ end
 
 function Mouse:drawMouse()
     love.mouse.setVisible(false)        --隐藏系统鼠标
+    love.graphics.setColor(1,1,1,1)
     if(self:onButton())then
         love.graphics.draw(self.icon_onButton,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_onButton))   --光标位于按钮上方
     else

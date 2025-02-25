@@ -1,7 +1,7 @@
 --这个按钮比较特殊，在点击暂停或者继续播放后，按钮的名称和图标会发生变化
 local NAME={"暂停播放","继续播放"}
 local ICONS={ProcessIcon(pause),ProcessIcon(play)}
-local bt_Pause=Button:new(50,120,80,ICONS[1],NAME[1])
+local bt_Pause=Button:new(450,20,80,ICONS[1],NAME[1])
 
 --逻辑“取反”函数：按下按钮时除实现了具体功能，还要改变按钮的名称和图标
 function bt_Pause:NOT(element)

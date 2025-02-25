@@ -38,7 +38,7 @@ end
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
     self:action_dodge()                 --|实现躲闪效果
-    self:drawButton()                   --|根据交互关系绘制相应图标
+--  self:drawButton()                   --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
@@ -67,7 +67,7 @@ function Button:mouseState()
     
 end
 --#1.4绘制按钮的图标
-function Button:drawButton()
+function Button:drawButton(r,g,b)
     --[[
     实现switch-case语句
     #1.cases
@@ -82,6 +82,7 @@ function Button:drawButton()
         *第三个参数是图像的旋转角度，默认0
         *第四个参数是图像的缩放比例，这里调用了Button:scaleCult()函数，返回了缩放比例，实际上这里是两个参数
     ↓↓]]
+    love.graphics.setColor(r,g,b,1) --设置按钮的颜色，且为完全不透明
     local X,Y=love.mouse.getPosition()
     case=self.MouseState
     local cases=

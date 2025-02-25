@@ -6,9 +6,11 @@
 --]]
 require("Class_Animation/Animation")
 require "Class_Animation/Animations/an_Mario"
+require "Class_Animation.Animations.an_Background1"
 
 function animationsSrcInit()
     local animations={}
     table.insert(animations,animation_Mario())
+    table.insert(animations,animation_Background1())
     return animations
 end

@@ -1,2 +1,2 @@
-Spirit=class()
+Spirit=class(Animation)
 
