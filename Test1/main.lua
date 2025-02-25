@@ -59,16 +59,4 @@ function love.draw()
     bt_Pause:drawButton()
     an_mario:drawAnimation()
     ms_StartMenu:drawMouse()
-    
-    Print[3]("frames:"..an_mario.frames, 400, 100, timeline, true)
-    Print[3]("currentFrame:"..an_mario.currentFrame, 400, 200, timeline, true)
-    Print[3]("bornTime:"..an_mario.bornTime, 400, 300, timeline, true)
-    Print[3]("lastSleepTime:"..an_mario.lastSleepTime, 400, 400, timeline, true)
-    Print[3]("age:"..an_mario.age, 400, 500, timeline, true)
-    Print[3]("speed:"..an_mario.speed, 400, 600, timeline, true)
-    --Print[3](an_mario.lastFlag, 400, 700, timeline, true)
-    --Print[3](an_mario.Flag, 400, 800, timeline, true)
-    Print[3]("timeline:"..timeline, 400, 700, timeline, true)
-
-
 end

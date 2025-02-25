@@ -9,8 +9,10 @@ Animation.y=0               --图片绘制位置
 Animation.Xscale=1          --图片缩放比例
 Animation.Yscale=1          --图片缩放比例
 Animation.bornTime=0        --动图创建时间
-Animation.lastSleepTime=0   --动图上一次暂停播放时间
+Animation.lastPauseTime=0   --动图上一次暂停播放时间
+Animation.lastPlayTime=0    --动图上一次继续播放时间
 Animation.age=0             --动图存在时间
+Animation.lastPauseAge=0    --动图上一次暂停时已存在的时间
 Animation.speed=60          --播放速度（此处是每个图形帧持续多少个游戏帧）
 Animation.lastFlag=false    --上一帧是否播放动图
 Animation.FLAG=false        --是否播放动图
@@ -24,8 +26,10 @@ function Animation:init(picSeries,x,y,Xscale,Yscale,timeline,speed,FLAG)
     self.Xscale=Xscale
     self.Yscale=Yscale
     self.bornTime=timeline
-    self.lastSleepTime=self.bornTime    --首次显示动图视作其从暂停状态恢复播放
+    self.lastPauseTime=self.bornTime    --首次显示动图视作其从暂停状态恢复播放
+    self.lastPlayTime=0
     self.age=0
+    self.lastPauseAge=0                 
     self.speed=speed
     self.lastFlag=FLAG
     self.FLAG=FLAG
@@ -34,10 +38,14 @@ end
 function Animation:update()
     --1st.更新动图（实际）存在时间以供下一步计算当前帧率
     if self.FLAG then
-        self.age=timeline-self.lastSleepTime
-        self.lastFlag=true
+        if not(self.lastFlag) then
+            self.lastPlayTime = timeline
+        end
+        self.age = self.lastPauseAge + (timeline - self.lastPlayTime)
+        self.lastFlag = true
     elseif self.lastFlag then
-        self.lastSleepTime=timeline
+        self.lastPauseTime=timeline
+        self.lastPauseAge=self.age
         self.lastFlag=false
     end
     --2nd.计算当前帧
