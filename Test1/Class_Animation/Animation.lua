@@ -51,7 +51,7 @@ function Animation:update()
     --2nd.计算当前帧
     self.currentFrame=math.floor(self.age/self.speed)+1
     --3rd.处理溢出
-    self.currentFrame=self.currentFrame%self.frames+1
+    self.currentFrame=(self.currentFrame-1)%self.frames+1
 end
 
 function Animation:drawAnimation()

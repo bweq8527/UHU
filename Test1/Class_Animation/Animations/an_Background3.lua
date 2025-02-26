@@ -1,4 +1,4 @@
-local an_Background3=Animation:new(bg3,0,0,1,1,timeline,8,true)
+local an_Background3=Animation:new(bg3,0,0,1,1,timeline,3,true)
 
 --重写背景的update方法，使其可以贴合窗口大小
 function an_Background3:update()

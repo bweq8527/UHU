@@ -81,6 +81,76 @@ function love.draw()
     bt_github:drawButton()
     bt_Pause:drawButton()
     bt_Next:drawButton()
-    an_mario:drawAnimation()
+    --an_mario:drawAnimation()
     ms_StartMenu:drawMouse()
+
+    --↓↓调试
+    -------------------------------------------------------------------------------------
+    --[[测试1：证明currentFrame的更新是正确的，问题不在Animation类本身
+    Print[3]("frames:"..bg[i].frames,200,200,timeline,0)
+    Print[3]("currentFrame:"..bg[i].currentFrame,200,250,timeline,0)
+    Print[3]("bornTime:"..bg[i].bornTime,200,300,timeline,0)
+    Print[3]("lastPauseTime:"..bg[i].lastPauseTime,200,350,timeline,0)
+    Print[3]("lastPlayTime:"..bg[i].lastPlayTime,200,400,timeline,0)
+    Print[3]("age:"..bg[i].age,200,450,timeline,0)
+    Print[3]("lastPauseAge:"..bg[i].lastPauseAge,200,500,timeline,0)
+    --]]
+    -------------------------------------------------------------------------------------
+    --[[测试2：将bg2逐帧打印发现第1、12、23、34、45等帧不符合预期，证明问题出在加载文件的时候
+    s=2*0.6
+    love.graphics.draw(bg2[1],0,0*s,0,0.5,0.5)
+    love.graphics.draw(bg2[2],0,100*s,0,0.5,0.5)
+    love.graphics.draw(bg2[3],0,200*s,0,0.5,0.5)
+    love.graphics.draw(bg2[4],0,300*s,0,0.5,0.5)
+    love.graphics.draw(bg2[5],0,400*s,0,0.5,0.5)
+    love.graphics.draw(bg2[6],0,500*s,0,0.5,0.5)
+    love.graphics.draw(bg2[7],0,600*s,0,0.5,0.5)
+    love.graphics.draw(bg2[8],0,700*s,0,0.5,0.5)
+    love.graphics.draw(bg2[9],0,800*s,0,0.5,0.5)
+    love.graphics.draw(bg2[10],200,0*s,0,0.5,0.5)
+    love.graphics.draw(bg2[11],200,100*s,0,0.5,0.5)
+    love.graphics.draw(bg2[12],200,200*s,0,0.5,0.5)
+    love.graphics.draw(bg2[13],200,300*s,0,0.5,0.5)
+    love.graphics.draw(bg2[14],200,400*s,0,0.5,0.5)
+    love.graphics.draw(bg2[15],200,500*s,0,0.5,0.5)
+    love.graphics.draw(bg2[16],200,600*s,0,0.5,0.5)
+    love.graphics.draw(bg2[17],200,700*s,0,0.5,0.5)
+    love.graphics.draw(bg2[18],200,800*s,0,0.5,0.5)
+    love.graphics.draw(bg2[19],400,0*s,0,0.5,0.5)
+    love.graphics.draw(bg2[20],400,100*s,0,0.5,0.5)
+    love.graphics.draw(bg2[21],400,200*s,0,0.5,0.5)
+    love.graphics.draw(bg2[22],400,300*s,0,0.5,0.5)
+    love.graphics.draw(bg2[23],400,400*s,0,0.5,0.5)
+    love.graphics.draw(bg2[24],400,500*s,0,0.5,0.5)
+    love.graphics.draw(bg2[25],400,600*s,0,0.5,0.5)
+    love.graphics.draw(bg2[26],400,700*s,0,0.5,0.5)
+    love.graphics.draw(bg2[27],400,800*s,0,0.5,0.5)
+    love.graphics.draw(bg2[28],600,0*s,0,0.5,0.5)
+    love.graphics.draw(bg2[29],600,100*s,0,0.5,0.5)
+    love.graphics.draw(bg2[30],600,200*s,0,0.5,0.5)
+    love.graphics.draw(bg2[31],600,300*s,0,0.5,0.5)
+    love.graphics.draw(bg2[32],600,400*s,0,0.5,0.5)
+    love.graphics.draw(bg2[33],600,500*s,0,0.5,0.5)
+    love.graphics.draw(bg2[34],600,600*s,0,0.5,0.5)
+    love.graphics.draw(bg2[35],600,700*s,0,0.5,0.5)
+    love.graphics.draw(bg2[36],600,800*s,0,0.5,0.5)
+    love.graphics.draw(bg2[37],800,0*s,0,0.5,0.5)
+    love.graphics.draw(bg2[38],800,100*s,0,0.5,0.5)
+    love.graphics.draw(bg2[39],800,200*s,0,0.5,0.5)
+    love.graphics.draw(bg2[40],800,300*s,0,0.5,0.5)
+    love.graphics.draw(bg2[41],800,400*s,0,0.5,0.5)
+    love.graphics.draw(bg2[42],800,500*s,0,0.5,0.5)
+    love.graphics.draw(bg2[43],800,600*s,0,0.5,0.5)
+    love.graphics.draw(bg2[44],800,700*s,0,0.5,0.5)
+    love.graphics.draw(bg2[45],800,800*s,0,0.5,0.5)
+    --]]
+    -------------------------------------------------------------------------------------
+    ---经过排查，动图帧序列的命名方式是从1，2，3到最大帧数，而love.filesystem.getDirectoryItems对这一情况的排序有问题，导致实际加载的帧序列为：
+    ---“1，10，11，12，13，14，15，16，17，18，19，2，20，21，22，23，24，25，26，27，28，29，3，30，31，32，33，34，35，36，37，38，39，4，40，41，42，43，44，45，5，6，7，8，9”这样的顺序
+    ---因此需要对帧序列进行排序例如重新编号001，002，003...065等
+    ---解决方式有两个思路：一是用批处理文件批量重命名帧序列，如将1.png改写为001.png；二是加载文件的时候正确地排序
+    ---考虑到可移植性等因素，应当选择重写一个加载方法使其正确地排序帧序列
+    -------------------------------------------------------------------------------------
+    --↑↑调试
+
 end

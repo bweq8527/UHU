@@ -20,29 +20,18 @@ Pixel1_lrg=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",60)
 Pixel2_cn=love.graphics.newFont("Sources/Fonts/fusion-zh_hans.ttf",40)
 -----------------------------------------------------------------------------
 --加载动图
+require "Func_Logic.func_FilesLoadingLogics"
 ----|马里奥
 Mario={}
 table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/1.png"))
 table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/2.png"))
 table.insert(Mario,love.graphics.newImage("Sources/Animations/Mario/3.png"))
 ----|背景1
-bg1={}
 local path_bg1="Sources/Animations/bg1/frames"
-local frames = love.filesystem.getDirectoryItems(path_bg1)
-for _, frame in ipairs(frames) do
-    table.insert(bg1, love.graphics.newImage(path_bg1 .. "/" .. frame))
-end
+bg1 = loadAnimationFrames(path_bg1)
 ----|背景2
-bg2={}
 local path_bg2="Sources/Animations/bg2/frames"
-local frames = love.filesystem.getDirectoryItems(path_bg2)
-for _, frame in ipairs(frames) do
-    table.insert(bg2, love.graphics.newImage(path_bg2 .. "/" .. frame))
-end
+bg2 = loadAnimationFrames(path_bg2)
 ----|背景3
-bg3={}
 local path_bg3="Sources/Animations/bg3/frames"
-local frames = love.filesystem.getDirectoryItems(path_bg3)
-for _, frame in ipairs(frames) do
-    table.insert(bg3, love.graphics.newImage(path_bg3 .. "/" .. frame))
-end
+bg3 = loadAnimationFrames(path_bg3)
