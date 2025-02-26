@@ -82,9 +82,13 @@ function Button:drawButton(r,g,b)
         *第三个参数是图像的旋转角度，默认0
         *第四个参数是图像的缩放比例，这里调用了Button:scaleCult()函数，返回了缩放比例，实际上这里是两个参数
     ↓↓]]
-    love.graphics.setColor(r,g,b,1) --设置按钮的颜色，且为完全不透明
+    if r and g and b then
+        love.graphics.setColor(r,g,b,1) --按照参数设置按钮的颜色，且为完全不透明
+    else
+        love.graphics.setColor(1,1,1,1) --设置按钮的颜色，且为完全不透明，默认为黑色不透明
+    end
     local X,Y=love.mouse.getPosition()
-    case=self.MouseState
+    local case=self.MouseState
     local cases=
     {
         [MouseStates[1]]=function()

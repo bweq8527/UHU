@@ -55,7 +55,7 @@ function Animation:update()
 end
 
 function Animation:drawAnimation()
-    love.graphics.setColor(1,1,1,0.8)
+    love.graphics.setColor(1,1,1,1)
     love.graphics.draw(self.picSeries[self.currentFrame],self.x,self.y,0,self.Xscale,self.Yscale)
 end
 

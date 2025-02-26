@@ -11,6 +11,7 @@ mouse_1=love.graphics.newImage("Sources/Icons/mouse_1.png")
 github=love.graphics.newImage("Sources/Icons/github.png")
 pause=love.graphics.newImage("Sources/Icons/pause.png")
 play=love.graphics.newImage("Sources/Icons/play.png")
+nextbg=love.graphics.newImage("Sources/Icons/next.png")
 -----------------------------------------------------------------------------
 --加载字体
 Pixel1_sml=love.graphics.newFont("Sources/Fonts/k8x12L-3.ttf",20)
@@ -30,4 +31,18 @@ local path_bg1="Sources/Animations/bg1/frames"
 local frames = love.filesystem.getDirectoryItems(path_bg1)
 for _, frame in ipairs(frames) do
     table.insert(bg1, love.graphics.newImage(path_bg1 .. "/" .. frame))
+end
+----|背景2
+bg2={}
+local path_bg2="Sources/Animations/bg2/frames"
+local frames = love.filesystem.getDirectoryItems(path_bg2)
+for _, frame in ipairs(frames) do
+    table.insert(bg2, love.graphics.newImage(path_bg2 .. "/" .. frame))
+end
+----|背景3
+bg3={}
+local path_bg3="Sources/Animations/bg3/frames"
+local frames = love.filesystem.getDirectoryItems(path_bg3)
+for _, frame in ipairs(frames) do
+    table.insert(bg3, love.graphics.newImage(path_bg3 .. "/" .. frame))
 end

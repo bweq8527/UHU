@@ -30,6 +30,7 @@ function love.load()
     love.window.setMode(window_width,window_height,{highdpi = true,resizable=true})    
     flag_FullScreen = false
     --初始化用户资源
+    -------------------------------------
     buttons=buttonsSrcInit()
     bt_test=buttons[1]
     bt_Fullscreen=buttons[2]
@@ -37,11 +38,19 @@ function love.load()
     bt_Setting=buttons[4]
     bt_github=buttons[5]
     bt_Pause=buttons[6]
+    bt_Next=buttons[7]
+    -------------------------------------
     mouses=mousesSrcInit()
     ms_StartMenu=mouses[1]
+    -------------------------------------
     animations=animationsSrcInit()
     an_mario=animations[1]
     an_bg1=animations[2]
+    an_bg2=animations[3]
+    an_bg3=animations[4]
+    --背景轮换控制
+    bg={an_bg1,an_bg2,an_bg3}
+    i=1 --背景编号
     --创建时间线以供游戏内时间使用
     timeline=1
 end
@@ -54,9 +63,10 @@ function love.update(dt)
     bt_Setting:update()
     bt_github:update()
     bt_Pause:update()
+    bt_Next:update()
     ms_StartMenu:update()
     an_mario:update()
-    an_bg1:update()
+    bg[i]:update()
     --游戏内时间变动
     timeline=timeline+dt*60
 end
@@ -64,12 +74,13 @@ end
 --循环绘制
 function love.draw()
     --绘制用户资源
-    an_bg1:drawAnimation()
-    bt_Fullscreen:drawButton(red[1],red[2],red[3])
-    bt_Exit:drawButton(red[1],red[2],red[3])
-    bt_Setting:drawButton(red[1],red[2],red[3])
-    bt_github:drawButton(red[1],red[2],red[3])
-    bt_Pause:drawButton(red[1],red[2],red[3])
+    bg[i]:drawAnimation()
+    bt_Fullscreen:drawButton()
+    bt_Exit:drawButton()
+    bt_Setting:drawButton()
+    bt_github:drawButton()
+    bt_Pause:drawButton()
+    bt_Next:drawButton()
     an_mario:drawAnimation()
     ms_StartMenu:drawMouse()
 end
