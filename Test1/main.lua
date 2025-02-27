@@ -62,6 +62,8 @@ function love.update(dt)
     --更新窗体大小
     window_width = love.graphics.getWidth()
     window_height = love.graphics.getHeight()
+    --更新鼠标位置
+    mouseX,mouseY=love.mouse.getPosition()
     --更新用户资源
     bt_Fullscreen:update()
     bt_Exit:update()

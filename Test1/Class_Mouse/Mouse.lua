@@ -8,6 +8,7 @@ Mouse.size=45
 Mouse.deltax=Mouse.size*(8/30)  
 Mouse.icon_normal=mouse_0
 Mouse.icon_onButton=mouse_1
+Mouse.nowButtonName=" " --当前鼠标所悬停的按钮的名称
 
 function Mouse:init(icon)
     self.pos={}
@@ -28,6 +29,7 @@ function Mouse:drawMouse()
     love.graphics.setColor(1,1,1,1)
     if(self:onButton())then
         love.graphics.draw(self.icon_onButton,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_onButton))   --光标位于按钮上方
+        Print[3](self.nowButtonName,mouseX,mouseY+50,timeline,1)
     else
         love.graphics.draw(self.icon_normal,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_normal))   --光标不位于按钮上方
     end
@@ -41,6 +43,7 @@ function Mouse:onButton()
         --调用button实例的MouseState私有变量，如果不是"normal"说明鼠标放在该按钮上，立刻将标记置1并退出循环
         if button.MouseState~="normal" then
             flag_onAnyButton=true
+            self.nowButtonName=button.name  --获取当前按钮的名称
             break
         else
             flag_onAnyButton=false

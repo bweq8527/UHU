@@ -87,7 +87,6 @@ function Button:drawButton(r,g,b)
     else
         love.graphics.setColor(1,1,1,1) --设置按钮的颜色，且为完全不透明，默认为黑色不透明
     end
-    local X,Y=love.mouse.getPosition()
     local case=self.MouseState
     local cases=
     {
@@ -96,11 +95,9 @@ function Button:drawButton(r,g,b)
         end,
         [MouseStates[2]]=function()
             love.graphics.draw(self.icon_undermouse,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_undermouse))
-            Print[3](self.name,X,Y+50,timeline,1)
         end,
         [MouseStates[3]]=function()
             love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_pressed))
-            Print[3](self.name,X,Y+50,timeline,1)
         end
     }   --#1（如上述）
     ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
