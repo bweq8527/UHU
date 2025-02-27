@@ -9,6 +9,8 @@ require "Class_Animation/Animations/an_Mario"
 require "Class_Animation.Animations.an_Background1"
 require "Class_Animation.Animations.an_Background2"
 require "Class_Animation.Animations.an_Background3"
+require "Class_Animation.Animations.an_Background4"
+require "Class_Animation.Animations.an_Background5"
 
 function animationsSrcInit()
     local animations={}
@@ -16,5 +18,7 @@ function animationsSrcInit()
     table.insert(animations,animation_Background1())
     table.insert(animations,animation_Background2())
     table.insert(animations,animation_Background3())
+    table.insert(animations,animation_Background4())
+    table.insert(animations,animation_Background5())
     return animations
 end

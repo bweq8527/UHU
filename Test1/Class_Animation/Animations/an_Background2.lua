@@ -17,8 +17,10 @@ function an_Background2:update()
     self.currentFrame=self.currentFrame%self.frames+1
     self.x=0
     self.y=0
-    self.Xscale=love.graphics.getWidth()/self.picSeries[self.currentFrame]:getWidth()
-    self.Yscale=love.graphics.getHeight()/self.picSeries[self.currentFrame]:getHeight()
+    local pic_width=self.picSeries[self.currentFrame]:getWidth()
+    local pic_height=self.picSeries[self.currentFrame]:getHeight()
+    self.Xscale=window_width/pic_width
+    self.Yscale=window_height/pic_height
 end
 
 --↓↓由于文件作用域的限制，在这个文件中定义的局部变量an_Background2无法被外部访问，所以需要提供一个访问接口

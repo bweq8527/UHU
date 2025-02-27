@@ -35,3 +35,9 @@ bg2 = loadAnimationFrames(path_bg2)
 ----|背景3
 local path_bg3="Sources/Animations/bg3/frames"
 bg3 = loadAnimationFrames(path_bg3)
+----|背景4
+local path_bg4="Sources/Animations/bg4/frames"
+bg4 = loadAnimationFrames(path_bg4)
+----|背景5
+local path_bg5="Sources/Animations/bg5/frames"
+bg5 = loadAnimationFrames(path_bg5)

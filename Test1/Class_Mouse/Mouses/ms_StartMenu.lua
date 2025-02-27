@@ -4,4 +4,4 @@ local ms_StartMenu=Mouse:new({mouse_0,mouse_1})
 function mouse_StartMenu()
     return ms_StartMenu
 end
---↑↑这个接口的作用是返回实例化后的Mouse类（ms_StartMenu）
+--↑↑这个接口的作用是返回实例化后的Mouse类（ms_StartMenu）  
