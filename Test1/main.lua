@@ -7,6 +7,7 @@ require("Func_Logic.func_ButtonPressedLogics")
 require("Class_Button/Buttons/Src_Buttons")
 require("Class_Mouse/Mouses/Src_Mouses")
 require("Class_Animation/Animations/Src_Animations")
+require("Class_Textblock/Textblocks/Src_Textblocks")
 require("Func_Display/Src_DisplayFuncs")
 --一些全局变量
 white={1,1,1}
@@ -29,7 +30,7 @@ function love.load()
     window_height = love.graphics.getHeight()
     love.window.setMode(window_width,window_height,{highdpi = true,resizable=true})    
     flag_FullScreen = false
-    --初始化用户资源
+    --[[初始化用户资源]]
     -------------------------------------
     buttons=buttonsSrcInit()
     bt_test=buttons[1]
@@ -53,7 +54,11 @@ function love.load()
     --背景轮换控制
     bg={an_bg1,an_bg2,an_bg3,an_bg4,an_bg5}
     i=1 --背景编号
-    --创建时间线以供游戏内时间使用
+    -------------------------------------
+    textblocks=textblocksSrcInit()
+    tb_buttonBG=textblocks[1]
+    -------------------------------------
+    --[[创建时间线以供游戏内时间使用]]
     timeline=1
 end
 
@@ -74,6 +79,7 @@ function love.update(dt)
     ms_StartMenu:update()
     an_mario:update()
     bg[i]:update()
+    tb_buttonBG:update()
     --游戏内时间变动
     timeline=timeline+dt*60
 end
@@ -82,6 +88,7 @@ end
 function love.draw()
     --绘制用户资源
     bg[i]:drawAnimation()
+    tb_buttonBG:drawTextblock()
     bt_Fullscreen:drawButton()
     bt_Exit:drawButton()
     bt_Setting:drawButton()

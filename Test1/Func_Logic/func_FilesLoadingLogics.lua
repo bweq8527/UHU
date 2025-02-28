@@ -27,3 +27,29 @@ function loadAnimationFrames(path)
     end
     return images
 end
+
+function loadTextblock_9BG(path)
+    local frames = love.filesystem.getDirectoryItems(path)
+    -- 提取数值并排序
+    local sortedFrames = {}
+    for _, frame in ipairs(frames) do
+        local num = frame:match("(%d+)")
+        if num then
+            table.insert(sortedFrames, { filename = frame, index = tonumber(num) })
+        end
+    end
+    -- 按数值排序
+    table.sort(sortedFrames, function(a, b) return a.index < b.index end)
+    -- 逐个加载图片
+    local images = {}
+    for _, item in ipairs(sortedFrames) do
+        local imgPath = path .. "/" .. item.filename
+        local success, img = pcall(love.graphics.newImage, imgPath)
+        if success then
+            table.insert(images, img)
+        else
+            print("Warning: Failed to load image - " .. imgPath)
+        end
+    end
+    return images
+end

@@ -44,3 +44,19 @@ function ProcessIcon(image)
     local icons={original, mask, smallImage}
     return icons
 end
+
+--#3.根据提供的缩放比例，返回缩放后的图片
+function scaleImage(image, scale)
+    -- 获取原始图像的宽度和高度
+    local width, height = image:getDimensions()
+    -- 创建一个新的Canvas，大小为缩放后的尺寸
+    local newWidth, newHeight = width * scale, height * scale
+    local canvas = love.graphics.newCanvas(newWidth, newHeight)
+    -- 设置Canvas并绘制缩放后的图像
+    love.graphics.setCanvas(canvas)
+    love.graphics.clear()
+    love.graphics.draw(image, 0, 0, 0, scale, scale)
+    love.graphics.setCanvas()
+    -- 返回一个新的Image对象
+    return love.graphics.newImage(canvas:newImageData())
+end

@@ -41,3 +41,8 @@ bg4 = loadAnimationFrames(path_bg4)
 ----|背景5
 local path_bg5="Sources/Animations/bg5/frames"
 bg5 = loadAnimationFrames(path_bg5)
+-----------------------------------------------------------------------------
+--加载文本框背景九宫格
+----|文本框1
+local path_buttonBG="Sources/Textblocks/tb1/tb1_9"
+buttonBG=loadAnimationFrames(path_buttonBG)

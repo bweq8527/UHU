@@ -22,6 +22,10 @@ function Mouse:update()
     self.pos.x=love.mouse.getX()
     self.pos.y=love.mouse.getY()
     self:drawMouse()
+
+    tb_buttonBG.txtContent=self.nowButtonName
+    tb_buttonBG.x=self.pos.x
+    tb_buttonBG.y=self.pos.y+50
 end
 
 function Mouse:drawMouse()
@@ -34,7 +38,7 @@ function Mouse:drawMouse()
     love.graphics.setColor(_R,_G,_B,1)  --鼠标颜色随时间变化
     if(self:onButton())then
         love.graphics.draw(self.icon_onButton,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_onButton))   --光标位于按钮上方
-        Print[4](self.nowButtonName,mouseX,mouseY+50,timeline,1)
+        Print[4](self.nowButtonName,mouseX,mouseY+50,timeline,1,180)
     else
         love.graphics.draw(self.icon_normal,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_normal))   --光标不位于按钮上方
     end
