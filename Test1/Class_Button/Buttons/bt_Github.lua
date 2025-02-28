@@ -1,4 +1,4 @@
-local bt_github=Button:new(350,20,80,ProcessIcon(github),"Follow Me on Github")
+local bt_github=Button:new(350,20,80,ProcessIcon(github),"Follow Me \non Github")
 
 --重写按钮的按下方法
 function bt_github:func_UnderMouse()

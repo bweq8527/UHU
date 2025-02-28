@@ -26,10 +26,15 @@ end
 
 function Mouse:drawMouse()
     love.mouse.setVisible(false)        --隐藏系统鼠标
-    love.graphics.setColor(1,1,1,1)
+    local mouseColorSpeed=0.04          --鼠标颜色变化速度
+    local mouseColorPhase=math.pi/3     --鼠标颜色变化相位
+    local _R =math.abs(math.sin(mouseColorSpeed*timeline-mouseColorPhase))    --r通道
+    local _G =math.abs(math.sin(mouseColorSpeed*timeline)                )   --g通道
+    local _B =math.abs(math.sin(mouseColorSpeed*timeline+mouseColorPhase))    --b通道
+    love.graphics.setColor(_R,_G,_B,1)  --鼠标颜色随时间变化
     if(self:onButton())then
         love.graphics.draw(self.icon_onButton,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_onButton))   --光标位于按钮上方
-        Print[3](self.nowButtonName,mouseX,mouseY+50,timeline,1)
+        Print[4](self.nowButtonName,mouseX,mouseY+50,timeline,1)
     else
         love.graphics.draw(self.icon_normal,self.pos.x-self.deltax,self.pos.y,0,scaleCult(self.size,self.size,self.icon_normal))   --光标不位于按钮上方
     end

@@ -90,9 +90,95 @@ local function printEffect3(strings, x, y, timeline, isColorful)
     end
 end
 
+local function printEffect4(strings, x, y, timeline, isColorful, maxWidth)
+    -- 颜色表
+    local Colors = 
+    {
+        {0.9, 0.1, 0.2},  -- 红色
+        {0.1, 0.85, 0.01}, -- 绿色
+        {0.2, 0.1, 0.91}, -- 蓝色
+        {0.91, 0.81, 0},  -- 黄色
+        {0.81, 0.05, 1}, -- 品红色
+        {0, 0.851, 1}, -- 青色
+        {0.5, 0.2, 0.7},
+        {0.7, 0.2, 0.5}
+    }
+
+    -- 默认字符颜色为白色
+    local default = {1, 1, 1}
+
+    -- 获取字符串长度
+    local length = utf8.len(strings)
+    if not length then return end  -- 防止 `utf8.len()` 失败时崩溃
+
+    -- 仅当炫彩模式时使用：获取颜色索引
+    local Color_String = {}
+    for j = 1, length do
+        table.insert(Color_String, default)
+    end
+
+    -- 如果是炫彩模式
+    if isColorful == 1 then  
+        local seed = length + utf8.codepoint(strings, 1, length) -- 增强随机性
+        math.randomseed(seed)
+        math.random(); math.random();  -- 确保随机性生效
+
+        -- 为每个字符分配颜色
+        for i = 1, length do
+            local index = math.random(1, #Colors)
+            Color_String[i] = Colors[index]
+        end
+    end
+
+    -- **提前声明所有局部变量**
+    local startX = x  -- 记录初始 x 位置
+    local font = love.graphics.getFont()
+    local lineHeight = font:getHeight() + 2  -- 适当增加行距
+    local charIndex = 1
+    local offsetY = 0
+    local colorChangeScale = 0.15  -- 颜色微变范围
+    local colorChangeValue = 0.08  -- 颜色微变速率
+    local COLOR = {1, 1, 1}
+
+    -- 遍历字符串中的每个字符并绘制
+    for pos, c in utf8.codes(strings) do
+        local char = utf8.char(c)
+
+        -- **处理换行符**
+        if char == "\n" then
+            x = startX  -- 回到起始 x 位置
+            y = y + lineHeight  -- 移动到下一行
+            charIndex = charIndex + 1
+        else
+            -- **计算跳动效果**
+            offsetY = math.sin(charIndex + timeline * 0.1 + pos * 3.14 / 2) * 1.2  
+
+            -- **计算颜色变化**
+            local currentColor = Color_String[charIndex]
+            COLOR[1] = math.max(0, math.min(1, currentColor[1] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
+            COLOR[2] = math.max(0, math.min(1, currentColor[2] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
+            COLOR[3] = math.max(0, math.min(1, currentColor[3] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
+
+            love.graphics.setColor(COLOR)  
+
+            -- **绘制字符**
+            love.graphics.print(char, x, y + offsetY)
+
+            -- **更新 x 坐标**
+            x = x + font:getWidth(char)
+
+            -- **自动换行**
+            if maxWidth and x > startX + maxWidth then
+                x = startX
+                y = y + lineHeight
+            end
+
+            charIndex = charIndex + 1
+        end
+    end
+end
+
 
 --返回所有效果
-Print={printEffect1,printEffect2,printEffect3}
+Print={printEffect1,printEffect2,printEffect3,printEffect4}
 return Print
-
-

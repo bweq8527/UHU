@@ -1,2 +1,0 @@
-Spirit=class(Animation)
-
