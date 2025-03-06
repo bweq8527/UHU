@@ -52,10 +52,10 @@ end
 function Textblock:drawTextblock()
     local inclination = (math.sin(timeline * 0.08)) * 0.03
     love.graphics.draw(self.BLOCK,self.x+self.finalWidth/2,self.y+self.finalHeight/2,0, 1, 1, self.finalWidth/2, self.finalHeight/2, inclination, 0)
-    Print[4](self.txtContent,self.x+self.font:getWidth("A")*0.4,self.y+self.font:getHeight("A")*0.4,timeline,true,self.maxWidth)
+    Print[4](self.txtContent,self.x+self.font:getWidth("好")*0.25,self.y+self.font:getHeight("好")*0.2,timeline,true,180)
 end
 
---根据字体大小对文本框背景图进行初步缩放处理，这一次缩放将使文本框背景的高度缩放至字体高度，宽度跟随高度同比例缩放
+--根据字体大小对文本框背景图进行初步缩放处理，这一次缩放将使文本框背景的高度缩放至字体高度的1.2倍，宽度跟随高度同比例缩放
 function Textblock:BGscale1()
     --0.字体宽度和高度
     local font_width=self.font:getWidth("A")
@@ -64,7 +64,7 @@ function Textblock:BGscale1()
     local BG_width=self.pic_BLOCK[1]:getWidth()+self.pic_BLOCK[2]:getWidth()+self.pic_BLOCK[3]:getWidth()       --文本框背景图原始宽度 
     local BG_height=self.pic_BLOCK[1]:getHeight()+self.pic_BLOCK[4]:getHeight()+self.pic_BLOCK[7]:getHeight()   --文本框背景图原始高度
     --2.计算缩放比例
-    local scale1=font_height/BG_height  --初步缩放比例
+    local scale1=1.2*font_height/BG_height  --初步缩放比例
     --3.逐一处理背景图九宫格
     for i = 1, 9 do
         self.pic_BLOCK[i]=scaleImage(self.pic_BLOCK[i],scale1)
@@ -75,14 +75,14 @@ end
 function Textblock:blockGenerate()
     --[[初始数据]]
     --字体宽度和高度
-    local font_width=self.font:getWidth("A")
-    local font_height=self.font:getHeight("A")
+    local font_width=self.font:getWidth("好")
+    local font_height=self.font:getHeight("好")
     --经自动换行处理后文本块的宽和高
     local TXT_width=0
     local TXT_height=0
     --[[第一步：计算文本框自动换行后的宽度]]
     --获取文本原始宽度（此处指像素数）
-    local originalTXT_Width= self.font:getWidth(self.txtContent)
+    local originalTXT_Width= self.font:getWidth(self.txtContent)*1.2
     --根据原始长度判断是否需要换行
     if originalTXT_Width>self.maxWidth then
         --需要换行，则最终宽度=最大宽度，最终高度=（行数+1）*字体高度
@@ -91,12 +91,12 @@ function Textblock:blockGenerate()
     else
         --无需换行，则最终宽度=原始宽度，最终高度= 字体高度
         TXT_width=originalTXT_Width
-        TXT_height=self.font:getHeight(self.txtContent)
+        TXT_height=font_height*2
     end
     --[[第二步：计算生成最终文本框背景图所需的缩放比例]]
     --为使得文本框完全包裹文字，需要设置一个额外的放大比例
-    local scale_naughtyX=1.2
-    local scale_naughtyY=1.1
+    local scale_naughtyX=1.08
+    local scale_naughtyY=1
     ----第一类：四个角块纵横均不缩放（可不定义，以下为定义）
     local scale2_TopLeft_X=1
     local scale2_TopLeft_Y=1

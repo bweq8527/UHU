@@ -107,14 +107,14 @@ local function printEffect4(strings, x, y, timeline, isColorful, maxWidth)
     local default = {1, 1, 1}
     -- 获取字符串长度
     local length = utf8.len(strings)
-    if not length then return end  -- 防止 `utf8.len()` 失败时崩溃
+    if not length then return end  -- 防止 utf8.len() 失败时崩溃
     -- 仅当炫彩模式时使用：获取颜色索引
     local Color_String = {}
     for j = 1, length do
         table.insert(Color_String, default)
     end
     -- 如果是炫彩模式
-    if isColorful == 1 then  
+    if isColorful == true then  
         local seed = length + utf8.codepoint(strings, 1, length) -- 增强随机性
         math.randomseed(seed)
         math.random();
@@ -146,10 +146,10 @@ local function printEffect4(strings, x, y, timeline, isColorful, maxWidth)
             offsetY = math.sin(charIndex + timeline * 0.1 + pos * 3.14 / 2) * 1.2  
             -- **计算颜色变化**
             local currentColor = Color_String[charIndex]
-            COLOR[1] = math.max(0, math.min(1, currentColor[1] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
-            COLOR[2] = math.max(0, math.min(1, currentColor[2] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
-            COLOR[3] = math.max(0, math.min(1, currentColor[3] + colorChangeScale * math.sin(charIndex + timeline * colorChangeValue)))
-            love.graphics.setColor(COLOR)  
+            COLOR[1] = currentColor[1]+colorChangeScale*math.sin(charIndex+timeline*colorChangeValue)
+            COLOR[2] = currentColor[2]+colorChangeScale*math.sin(charIndex+timeline*colorChangeValue)
+            COLOR[3] = currentColor[3]+colorChangeScale*math.sin(charIndex+timeline*colorChangeValue)
+            love.graphics.setColor(COLOR)
             -- **计算倾斜量**
             local inclination = (math.sin(timeline * 0.08)) * 0.08
             -- **绘制字符**

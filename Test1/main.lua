@@ -88,7 +88,6 @@ end
 function love.draw()
     --绘制用户资源
     bg[i]:drawAnimation()
-    tb_buttonBG:drawTextblock()
     bt_Fullscreen:drawButton()
     bt_Exit:drawButton()
     bt_Setting:drawButton()
@@ -96,4 +95,6 @@ function love.draw()
     bt_Pause:drawButton()
     bt_Next:drawButton()
     ms_StartMenu:drawMouse()
+
+    Print[4]("FPS:"..love.timer.getFPS(),window_width-120,window_height-50,timeline,true,180)
 end
