@@ -27,7 +27,7 @@ end
 
 --重写按钮的按下方法
 function bt_Pause:func_UnderMouse()
-    bg[i]:stateExchange()
+    bg[bgID]:stateExchange()
     --更改名称
     self.name=self:NOT(self.name)
     --更改图标

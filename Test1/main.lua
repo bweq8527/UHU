@@ -53,7 +53,7 @@ function love.load()
     an_bg5=animations[6]
     --背景轮换控制
     bg={an_bg1,an_bg2,an_bg3,an_bg4,an_bg5}
-    i=1 --背景编号
+    bgID=1 --背景编号
     -------------------------------------
     textblocks=textblocksSrcInit()
     tb_buttonBG=textblocks[1]
@@ -78,7 +78,7 @@ function love.update(dt)
     bt_Next:update()
     ms_StartMenu:update()
     an_mario:update()
-    bg[i]:update()
+    bg[bgID]:update()
     tb_buttonBG:update()
     --游戏内时间变动
     timeline=timeline+dt*60
@@ -87,7 +87,7 @@ end
 --循环绘制
 function love.draw()
     --绘制用户资源
-    bg[i]:drawAnimation()
+    bg[bgID]:drawAnimation()
     bt_Fullscreen:drawButton()
     bt_Exit:drawButton()
     bt_Setting:drawButton()
@@ -96,5 +96,5 @@ function love.draw()
     bt_Next:drawButton()
     ms_StartMenu:drawMouse()
 
-    Print[4]("FPS:"..love.timer.getFPS(),window_width-120,window_height-50,timeline,true,180)
+    Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
 end
