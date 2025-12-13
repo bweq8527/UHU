@@ -58,8 +58,10 @@ function love.load()
     textblocks=textblocksSrcInit()
     tb_buttonBG=textblocks[1]
     -------------------------------------
-    --[[创建时间线以供游戏内时间使用]]
+    --创建时间线以供游戏内时间使用
     timeline=1
+    --将内置参数dt初始化为一个全局变量以便调用
+    DT=1
 end
 
 --循环更新
@@ -82,6 +84,8 @@ function love.update(dt)
     tb_buttonBG:update()
     --游戏内时间变动
     timeline=timeline+dt*60
+    --DT更新
+    DT=dt
 end
 
 --循环绘制
@@ -94,7 +98,9 @@ function love.draw()
     bt_github:drawButton()
     bt_Pause:drawButton()
     bt_Next:drawButton()
+    
     ms_StartMenu:drawMouse()
 
     Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
+    Print[1]("DT:"..DT,window_width-160,window_height-100)
 end

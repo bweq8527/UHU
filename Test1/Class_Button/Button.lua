@@ -37,8 +37,7 @@ end
 --#1.2更新
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
-    self:action_dodge()                 --|实现躲闪效果
---  self:drawButton()                   --|根据交互关系绘制相应图标
+    self:drawButton()                   --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
@@ -91,13 +90,13 @@ function Button:drawButton(r,g,b)
     local cases=
     {
         [MouseStates[1]]=function()
-            love.graphics.draw(self.icon_normal,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_normal))
+            love.graphics.draw(self.icon_normal,self:action_dodge().x,self:action_dodge().y,0,scaleCult(self.size,self.size,self.icon_normal))
         end,
         [MouseStates[2]]=function()
-            love.graphics.draw(self.icon_undermouse,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_undermouse))
+            love.graphics.draw(self.icon_undermouse,self:action_dodge().x,self:action_dodge().y,0,scaleCult(self.size,self.size,self.icon_undermouse))
         end,
         [MouseStates[3]]=function()
-            love.graphics.draw(self.icon_pressed,self:action_dodge(self.pos).x,self:action_dodge(self.pos).y,0,scaleCult(self.size,self.size,self.icon_pressed))
+            love.graphics.draw(self.icon_pressed,self:action_dodge().x,self:action_dodge().y,0,scaleCult(self.size,self.size,self.icon_pressed))
         end
     }   --#1（如上述）
     ((cases[case]) or function()print("Error: Invalid MouseState")end) ()
@@ -108,14 +107,30 @@ function Button:action_dodge()
     local trueX,trueY=love.mouse.getPosition()                                              --获取鼠标位置
     local icon_basePoint={self.pos.x+self.size/2,self.pos.y+self.size/2}                    --按钮中心
     local ProcessedPos={}                                                                   --处理后的图标位置
-    --*1.1如果鼠标位于按钮附近（图标外围50%区域）,执行以下代码以使图标向鼠标相对中心的方向远离。但距离中心特别近将会导致缩放比例过大，设置一个上限
+    --*1.鼠标靠近按钮，实现“躲闪”效果
+    --Ver1：如果鼠标位于按钮附近（图标外围50%区域）,执行以下代码以使图标向鼠标相对中心的方向远离。但距离中心特别近将会导致缩放比例过大，为缩放比例设置一个上限
+    --[[
     if  trueX>icon_basePoint[1]-self.size and trueX<icon_basePoint[1]+self.size and trueY>icon_basePoint[2]-self.size and trueY<icon_basePoint[2]+self.size then
-        local distance=math.sqrt((trueX-icon_basePoint[1])^2+(trueY-icon_basePoint[2])^2)   --计算鼠标与按钮中心的距离
-        local scale=math.min(20/distance^1.25,20)                                            --计算缩放比例（按照引力场的平方反比关系），上限为5倍    
-        local delta_x=-scale*(trueX-icon_basePoint[1])                                      --计算x方向的位移
-        local delta_y=-scale*(trueY-icon_basePoint[2])                                      --计算y方向的位移
+        local distance=math.sqrt((trueX-icon_basePoint[1])^2+(trueY-icon_basePoint[2])^2)       --计算鼠标与按钮中心的距离
+        local scale=math.min(20/distance^1.25,20)                                               --计算缩放比例（按照引力场的平方反比关系），上限为5倍    
+        local delta_x=-scale*(trueX-icon_basePoint[1])                                          --计算x方向的位移
+        local delta_y=-scale*(trueY-icon_basePoint[2])                                          --计算y方向的位移
         ProcessedPos.x=self.pos.x+delta_x                                                 
         ProcessedPos.y=self.pos.y+delta_y
+    --[[
+    --Ver2：添加平滑效果，使动效显得不那么僵硬
+    --[[]]
+    local distance=math.sqrt((trueX-icon_basePoint[1])^2+(trueY-icon_basePoint[2])^2)       --计算鼠标与按钮中心的距离
+    local LERP_speed=0.15                                                                   --插值速度
+    local LERP=function(a,b,t) return a+(b-a)*t end                                         --插值函数
+    if distance<self.size*1.2 and distance>self.size*0.1 then                               --把距离图标中心10%~120%图标尺寸规定为动效生效的范围，相比Ver1更自然
+        local normalizedDistance=distance/(self.size*1.2)                                   --归一化距离（0~1）
+        local influence_factor=1.0-normalizedDistance^2                                     --根据归一化的距离设定影响因子（0~1），按引力场平方反比关系，距离越近影响越大
+        local target_x=self.pos.x - influence_factor* (trueX - icon_basePoint[1])           --计算目标x位置
+        local target_y=self.pos.y - influence_factor* (trueY - icon_basePoint[2])           --计算目标y位置
+        ProcessedPos.x=LERP(self.pos.x,target_x,LERP_speed)                                 --计算处理后x位置(经过线性插值)
+        ProcessedPos.y=LERP(self.pos.y,target_y,LERP_speed)                                 --计算处理后y位置(经过线性插值)
+    --[[]]
     --*2.其他情况
     else
         ProcessedPos.x=self.pos.x
