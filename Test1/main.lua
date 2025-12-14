@@ -103,4 +103,10 @@ function love.draw()
 
     Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
     Print[1]("DT:"..DT,window_width-160,window_height-100)
+    --[[
+    <调试>
+    Print[1]("NowPlayingBackgroundNo.:"..bgID,window_width-560,window_height-150)
+    Print[1]("NowPlayingBackgroundFLAG:"..boolean2string(bg[bgID].FLAG),window_width-560,window_height-200)
+    Print[1]("NowPauseButtonName:"..bt_Pause.name,window_width-560,window_height-250)
+    ]]
 end

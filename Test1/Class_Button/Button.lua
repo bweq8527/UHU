@@ -37,7 +37,6 @@ end
 --#1.2更新
 function Button:update()
     self:mouseState()                   --|判断鼠标与按钮的交互关系
-    self:drawButton()                   --|根据交互关系绘制相应图标
 end
 --#1.3判断鼠标与按钮交互关系
 function Button:mouseState()
