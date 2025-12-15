@@ -8,6 +8,7 @@ require("Class_Button/Buttons/Src_Buttons")
 require("Class_Mouse/Mouses/Src_Mouses")
 require("Class_Animation/Animations/Src_Animations")
 require("Class_Textblock/Textblocks/Src_Textblocks")
+require("Class_Page/Pages/Src_Pages")
 require("Func_Display/Src_DisplayFuncs")
 --一些全局变量
 white={1,1,1}
@@ -51,9 +52,13 @@ function love.load()
     an_bg3=animations[4]
     an_bg4=animations[5]
     an_bg5=animations[6]
+    an_GUIbg1=animations[7]
     --背景轮换控制
     bg={an_bg1,an_bg2,an_bg3,an_bg4,an_bg5}
     bgID=1 --背景编号
+    -------------------------------------
+    pages=pagesSrcInit()
+    pg_GUItest=pages[1]
     -------------------------------------
     textblocks=textblocksSrcInit()
     tb_buttonBG=textblocks[1]
@@ -80,8 +85,11 @@ function love.update(dt)
     bt_Next:update()
     ms_StartMenu:update()
     an_mario:update()
+    an_GUIbg1:update()
     bg[bgID]:update()
     tb_buttonBG:update()
+
+    pg_GUItest:update()
     --游戏内时间变动
     timeline=timeline+dt*60
     --DT更新
@@ -92,19 +100,29 @@ end
 function love.draw()
     --绘制用户资源
     bg[bgID]:drawAnimation()
+    
+    --an_GUIbg1:drawAnimation()
+--[
     bt_Fullscreen:drawButton()
     bt_Exit:drawButton()
     bt_Setting:drawButton()
     bt_github:drawButton()
     bt_Pause:drawButton()
     bt_Next:drawButton()
+--]]
+    pg_GUItest:drawPage()
     
     ms_StartMenu:drawMouse()
 
     Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
     Print[1]("DT:"..DT,window_width-160,window_height-100)
+    
+
     --[[
     <调试>
+    Print[1]("pageName:"..pg_GUItest.name,window_width-560,window_height-150)
+    Print[1]("pageElementPos:"..pg_GUItest.elements.buttons[1].pos.x,window_width-560,window_height-200)
+    Print[1]("pageElementPos:"..pg_GUItest.elements.buttons[2].pos.x,window_width-560,window_height-250)
     Print[1]("NowPlayingBackgroundNo.:"..bgID,window_width-560,window_height-150)
     Print[1]("NowPlayingBackgroundFLAG:"..boolean2string(bg[bgID].FLAG),window_width-560,window_height-200)
     Print[1]("NowPauseButtonName:"..bt_Pause.name,window_width-560,window_height-250)

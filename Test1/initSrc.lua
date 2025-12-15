@@ -41,6 +41,9 @@ bg4 = loadAnimationFrames(path_bg4)
 ----|背景5
 local path_bg5="Sources/Animations/bg5/frames"
 bg5 = loadAnimationFrames(path_bg5)
+----|GUI框背景1
+local path_GUIbg1="Sources/Animations/GUIbg1/frames/REASONABLE"
+GUIbg1 = loadAnimationFrames(path_GUIbg1)
 -----------------------------------------------------------------------------
 --加载文本框背景九宫格
 ----|文本框1

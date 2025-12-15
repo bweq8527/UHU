@@ -1,4 +1,4 @@
-local bt_Exit=Button:new(150,20,80,ProcessIcon(exit),"退出游戏 ")
+local bt_Exit=Button:new(250,20,80,ProcessIcon(exit),"退出游戏 ")
 
 --重写按钮的按下方法
 function bt_Exit:func_UnderMouse()

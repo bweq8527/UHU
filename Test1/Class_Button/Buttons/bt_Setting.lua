@@ -1,4 +1,4 @@
-local bt_setting=Button:new(250,20,80,ProcessIcon(setting),"设置")
+local bt_setting=Button:new(350,20,80,ProcessIcon(setting),"设置")
 
 --↓↓由于文件作用域的限制，在这个文件中定义的局部变量bt_test无法被外部访问，所以需要提供一个访问接口
 function button_setting()

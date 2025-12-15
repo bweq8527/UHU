@@ -1,7 +1,7 @@
 --这个按钮比较特殊，在全屏化后，按钮的名称和图标会发生变化
 local NAME={"全屏","退出全屏"}
 local ICONS={ProcessIcon(fullscreen),ProcessIcon(unFullscreen)}
-local bt_Fullscreen=Button:new(50,20,80,ICONS[1],NAME[1])
+local bt_Fullscreen=Button:new(150,20,80,ICONS[1],NAME[1])
 
 --逻辑“取反”函数：按下按钮时除实现了具体功能，还要改变按钮的名称和图标
 function bt_Fullscreen:NOT(element)

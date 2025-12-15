@@ -11,8 +11,11 @@ Button=class()
 ·类参数
 ↓↓]]
 Button.pos={}
-Button.pos.x=0                          --|位置x
-Button.pos.y=0                          --|位置y
+Button.pos.x=0                          --|绝对位置x(图标相对窗口的实时x位置)
+Button.pos.y=0                          --|绝对位置y(图标相对窗口的实时y位置)
+Button.RelativePos={}
+Button.RelativePos.x=Button.pos.x       --|相对位置x(图标相对页面的初始x位置)
+Button.RelativePos.y=Button.pos.y       --|相对位置y(图标相对页面的初始y位置)
 Button.size=50                          --|大小
 Button.icon_normal=fullscreen           --|图标（通常情况）
 Button.icon_undermouse=unFullscreen     --|图标（鼠标悬停）
@@ -27,6 +30,9 @@ function Button:init(x,y,size,icon,name)
     self.pos={}
     self.pos.x=x
     self.pos.y=y
+    self.RelativePos={}
+    self.RelativePos.x=x
+    self.RelativePos.y=y
     self.size=size
     self.icon_normal=icon[1]
     self.icon_undermouse=icon[2]
