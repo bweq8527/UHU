@@ -9,8 +9,8 @@ local pg_GUItest=Page:new(
     nil,                --child
     false,              --isFullScreen
     {x=0,y=0},      --pos
-    550,                --width
-    120,                --height
+    782,                --width
+    176*0.8,                --height
     "GUI测试页面",       --name
     an_GUIbg1,           --background
     {
@@ -32,8 +32,9 @@ local pg_GUItest=Page:new(
 )
 
 function pg_GUItest:update()
----为了调整该页面中按钮的具体位置重写了更新函数
-    self:setPos()
+---为了调整该页面的运动模式及该页面中按钮的具体位置重写了更新函数
+    self.MotionMode=self.MotionModes[2]  --设置页面运动模式
+    self:setPos(self.MotionMode)
     self.background:update()
     for _,button in ipairs(self.elements.buttons) do
         button.pos.x=110+self.pos.x+button.RelativePos.x --按钮当前x坐标还要再加110的偏移量

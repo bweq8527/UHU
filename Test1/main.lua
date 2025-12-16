@@ -4,12 +4,13 @@ require("initSrc")
 require("class")
 require("Func_Logic/func_DrawLogics")
 require("Func_Logic.func_ButtonPressedLogics")
+require("Func_Logic.func_FormatConvertingLogics")
+require("Func_Display/Src_DisplayFuncs")
 require("Class_Button/Buttons/Src_Buttons")
 require("Class_Mouse/Mouses/Src_Mouses")
 require("Class_Animation/Animations/Src_Animations")
 require("Class_Textblock/Textblocks/Src_Textblocks")
 require("Class_Page/Pages/Src_Pages")
-require("Func_Display/Src_DisplayFuncs")
 --一些全局变量
 white={1,1,1}
 black={0,0,0}
@@ -117,6 +118,13 @@ function love.draw()
     Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
     Print[1]("DT:"..DT,window_width-160,window_height-100)
     
+    Print[1]("pageMotionMode:"..pg_GUItest.MotionMode,window_width-560,window_height-150)
+    Print[1]("FLAG:"..boolean2string(pg_GUItest.hideOnEdgeParams.FLAG),window_width-560,window_height-200)
+    love.graphics.rectangle("line", pg_GUItest.hideOnEdgeParams.AreaTrigger[1],pg_GUItest.hideOnEdgeParams.AreaTrigger[3], pg_GUItest.hideOnEdgeParams.AreaTrigger[2]-pg_GUItest.hideOnEdgeParams.AreaTrigger[1], pg_GUItest.hideOnEdgeParams.AreaTrigger[4]-pg_GUItest.hideOnEdgeParams.AreaTrigger[3])
+    Print[1]("Goal_Pos:"..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSX..","..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSY,window_width-560,window_height-250)
+    Print[1]("Pos:"..pg_GUItest.pos.x..","..pg_GUItest.pos.y,window_width-560,window_height-300)
+
+
 
     --[[
     <调试>

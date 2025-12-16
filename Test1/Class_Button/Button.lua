@@ -1,4 +1,7 @@
-require("Func_Display/Src_DisplayFuncs")--|引用文字处理控件
+--引用依赖项
+require("Func_Display/Src_DisplayFuncs")            --|引用文字处理控件
+require("Func_Logic.func_MousePosLogics")           --|引用鼠标位置逻辑函数
+
 local MouseStates={}                    --|鼠标状态（与按钮的交互关系）
 MouseStates[1]="normal"
 MouseStates[2]="underMouse"
@@ -51,10 +54,9 @@ function Button:mouseState()
     --love.graphics.print("pos.y"..self.pos.y,500,550)
     --love.graphics.rectangle("line",self.pos.x,self.pos.y,self.size,self.size)
     --↑↑调试↑↑
-    local nowX, nowY = love.mouse.getPosition() --|鼠标位置
     local nowMouse = love.mouse.isDown(1)       --|鼠标左键是否按下
     local mouseState=MouseStates[1]             --|鼠标状态
-    if  nowX>self.pos.x and nowX<self.pos.x+self.size and nowY>self.pos.y and nowY<self.pos.y+self.size then
+    if isMouseInsideBox({self.pos.x,self.pos.x+self.size,self.pos.y,self.pos.y+self.size}) then
         if nowMouse then
             mouseState= MouseStates[3]               --*1.鼠标按下按钮
         else
