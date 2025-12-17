@@ -118,12 +118,6 @@ function love.draw()
     Print[1]("FPS:"..love.timer.getFPS(),window_width-160,window_height-50)
     Print[1]("DT:"..DT,window_width-160,window_height-100)
     
-    Print[1]("pageMotionMode:"..pg_GUItest.MotionMode,window_width-560,window_height-150)
-    Print[1]("FLAG:"..boolean2string(pg_GUItest.hideOnEdgeParams.FLAG),window_width-560,window_height-200)
-    love.graphics.rectangle("line", pg_GUItest.hideOnEdgeParams.AreaTrigger[1],pg_GUItest.hideOnEdgeParams.AreaTrigger[3], pg_GUItest.hideOnEdgeParams.AreaTrigger[2]-pg_GUItest.hideOnEdgeParams.AreaTrigger[1], pg_GUItest.hideOnEdgeParams.AreaTrigger[4]-pg_GUItest.hideOnEdgeParams.AreaTrigger[3])
-    Print[1]("Goal_Pos:"..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSX..","..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSY,window_width-560,window_height-250)
-    Print[1]("Pos:"..pg_GUItest.pos.x..","..pg_GUItest.pos.y,window_width-560,window_height-300)
-
 
 
     --[[
@@ -134,5 +128,11 @@ function love.draw()
     Print[1]("NowPlayingBackgroundNo.:"..bgID,window_width-560,window_height-150)
     Print[1]("NowPlayingBackgroundFLAG:"..boolean2string(bg[bgID].FLAG),window_width-560,window_height-200)
     Print[1]("NowPauseButtonName:"..bt_Pause.name,window_width-560,window_height-250)
+    love.graphics.rectangle("line", pg_GUItest.hideOnEdgeParams.AreaTrigger[1],pg_GUItest.hideOnEdgeParams.AreaTrigger[3], pg_GUItest.hideOnEdgeParams.AreaTrigger[2]-pg_GUItest.hideOnEdgeParams.AreaTrigger[1], pg_GUItest.hideOnEdgeParams.AreaTrigger[4]-pg_GUItest.hideOnEdgeParams.AreaTrigger[3])
+    Print[1]("Goal_Pos:"..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSX..","..pg_GUItest.hideOnEdgeParams.CurrentGoal.POSY,window_width-560,window_height-250)
+    Print[1]("Pos:"..pg_GUItest.pos.x..","..pg_GUItest.pos.y,window_width-560,window_height-300)
+    Print[1]("pageMotionMode:"..pg_GUItest.MotionMode,window_width-560,window_height-150)
+    Print[1]("FLAG:"..boolean2string(pg_GUItest.hideOnEdgeParams.FLAG),window_width-560,window_height-200)
+
     ]]
 end

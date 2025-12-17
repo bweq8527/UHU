@@ -44,7 +44,9 @@ Page.hideOnEdgeParams.Goals={
     [2]={STATE="gonnaAppear",POSX=0,POSY=0}                            
 }                                                                   --定义页面的两种目标位置，隐藏时在窗口外，显示时在窗口内
 Page.hideOnEdgeParams.CurrentGoal=Page.hideOnEdgeParams.Goals[1]    --定义页面当前的运动趋势，初始为隐藏
-Page.hideOnEdgeParams.Speed=10                                      --定义页面移动的速度
+Page.hideOnEdgeParams.Speed=10                                      --定义页面匀速移动的速度
+Page.hideOnEdgeParams.Smoothness=0.1                                --定义页面匀减速移动的平滑度
+Page.hideOnEdgeParams.V={x=0,y=0}                                   --定义页面弹簧运动的初始速度
 
 function Page:init(id,parent,child,isFullScreen,pos,width,height,name,background,elements,displayState,operateState,effectOpen,effectExit)
     self.id=id
@@ -125,15 +127,33 @@ function Page:setPos(Mode)
                 self.hideOnEdgeParams.AreaTrigger={0,window_width,0,40}             -- 恢复触发区域为预设值
                 self.hideOnEdgeParams.CurrentGoal = self.hideOnEdgeParams.Goals[1] -- 隐藏位置
             end
-
-            -- 3. 执行物理移动（这部分你写的没问题）
+            --页面运动方式：匀速运动、匀减速运动、弹簧运动
+            --[[1.匀速运动
             local nextX, nextY = motionA2B_Uniform(
                 self.pos.x, self.pos.y,
                 self.hideOnEdgeParams.CurrentGoal.POSX,
                 self.hideOnEdgeParams.CurrentGoal.POSY,
                 self.hideOnEdgeParams.Speed
+            )]]
+            --[[2.匀减速运动
+            local nextX, nextY = motionA2B_Decelerate(
+                self.pos.x, self.pos.y,
+                self.hideOnEdgeParams.CurrentGoal.POSX,
+                self.hideOnEdgeParams.CurrentGoal.POSY,
+                self.hideOnEdgeParams.Smoothness
+            )]]
+            --[[3.弹簧运动]]
+            local nextX, nextY, vX, vY = motionA2B_Spring(
+                self.pos.x, self.pos.y,
+                self.hideOnEdgeParams.CurrentGoal.POSX,
+                self.hideOnEdgeParams.CurrentGoal.POSY,
+                self.hideOnEdgeParams.V.x,
+                self.hideOnEdgeParams.V.y,
+                0.2,   -- stiffness，弹簧刚度系数，越大弹性越强
+                0.3     -- damping，阻尼系数，越大阻力越强
             )
             self.pos.x, self.pos.y = nextX, nextY
+            self.hideOnEdgeParams.V.x, self.hideOnEdgeParams.V.y = vX, vY
         end
             }
             (cases[case] or default)()
